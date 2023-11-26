@@ -1,6 +1,7 @@
 package productservice.services;
 
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import productservice.dto.CategoryDto;
 import productservice.dto.CreateProductDto;
@@ -23,7 +24,7 @@ import java.util.Optional;
 @Primary
 public class SelfProductServiceImpl implements ProductService {
 
-    ProductRepository productRepository;
+    private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final PriceRespository priceRespository;
 
@@ -55,7 +56,20 @@ public class SelfProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getProductList() {
+    public List<GenericProductDto> getProductList() {
+
+        List<Product> products = productRepository.findAll();
+
+        List<GenericProductDto> genericProductDtos = new ArrayList<>();
+
+        for(Product product : products){
+            genericProductDtos.add(GenericProductDto.from(product));
+        }
+
+
+        return genericProductDtos;
+
+        /*
         List<Product> productList = productRepository.findAll();
 
         List<ProductDto> productDtoList = new ArrayList<>();
@@ -69,6 +83,8 @@ public class SelfProductServiceImpl implements ProductService {
             productDtoList.add(productDto);
         }
         return productDtoList;
+
+         */
     }
     
     @Override

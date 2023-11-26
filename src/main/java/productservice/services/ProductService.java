@@ -13,7 +13,7 @@ import java.util.List;
 public interface ProductService {
 
     public ProductDto getProductById(Long id) throws NotFoundException;
-    public List<ProductDto> getProductList();
+    public List<GenericProductDto> getProductList();
 
     public List<GenericProductDto> getProductsByCategory(String categoryName) throws NotFoundException;
 

@@ -1,6 +1,8 @@
 package productservice.repository;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import productservice.dto.ProductDto;
@@ -16,4 +18,9 @@ public interface ProductRepository
 //            "on Product.category = :category",nativeQuery = true )
     List<Product> findProductByCategory(Category category);
 
+    List<Product> findAll();
+
+    List<Product> findAllByTitleLike(String titleRegex);
+
+    Page<Product> findAllByTitleContaining(String title, Pageable pageable);
 }

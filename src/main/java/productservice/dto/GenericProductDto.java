@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import productservice.models.Category;
 import productservice.models.Price;
+import productservice.models.Product;
 
 @Getter
 @Setter
@@ -18,4 +19,11 @@ public class GenericProductDto {
     private String description;
     private double price;
     private String image;
+
+
+    public static GenericProductDto from(Product product){
+        return new GenericProductDto(product.getId(), product.getTitle(),
+                product.getCategory().getName(), product.getDescription(),
+                product.getPrice().getPrice(),product.getImage());
+    }
 }
